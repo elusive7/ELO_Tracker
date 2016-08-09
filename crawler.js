@@ -3,20 +3,20 @@ var cheerio = require('cheerio');
 var URL = require('url-parse');
 
 //User defined variables
-var person = "Noctierre";
+var person = "yoyoonarock";
 var server = "na";
 
 var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
 var url = new URL(START_URL);
 
 //Potential divisions
-var SEARCH_CHALLENGER = "Challenger";
-var SEARCH_MASTER = "Master";
-var SEARCH_DIA = "Diamond";
-var SEARCH_PLAT = "Platinum";
-var SEARCH_GOLD = "Gold";
-var SEARCH_SILVER = "Silver";
-var SEARCH_BRONZE = "Bronze";
+var SEARCH_CHALLENGER = "Challenger ";
+var SEARCH_MASTER = "Master ";
+var SEARCH_DIA = "Diamond ";
+var SEARCH_PLAT = "Platinum ";
+var SEARCH_GOLD = "Gold ";
+var SEARCH_SILVER = "Silver ";
+var SEARCH_BRONZE = "Bronze ";
 
 var pageToVisit = "http://" + server + ".op.gg/summoner/userName=" + person;
 console.log("Visiting " + pageToVisit);
@@ -47,7 +47,12 @@ request(pageToVisit, function(error, response, body) {
         if (!isWordFound) {
             isWordFound = searchForWord($, SEARCH_CHALLENGER);
         }
+        if (!isWordFound) {
+            isWordFound = searchForWord($, SEARCH_BRONZE);
+        }
+
         var hisRanking = returnRanking($, 'LP');
+        //var hisDivision = returnRanking($, 'LP');
 
         if(isWordFound) {
             console.log(person + " is currently: " + '\n' + hisRanking);
@@ -75,6 +80,16 @@ request(pageToVisit, function(error, response, body) {
             {
                 console.log("Why are using this");
             }
+
+            if (hisRanking.charAt(0) === 'S')
+            {
+                console.log("Tough ELO :|");
+            }
+
+            if (hisRanking.charAt(0) === 'B')
+            {
+                console.log(". . .");
+            }
         } else {
             console.log("Couldn't find " + person + " :|");
         }
@@ -91,33 +106,38 @@ function returnRanking($, word) {
     var temp = bodyText.indexOf(word);
 
     //TODO: FIX MODIFY 'SEARCH_PLAT' TO 'SEARCH_X'
-    var x = bodyText.indexOf(SEARCH_PLAT);
+    //if (bodyText.indexOf(SEARCH_CHALLENGER) != -1)
+    //    var x = bodyText.indexOf(SEARCH_CHALLENGER);
+    if (bodyText.indexOf(SEARCH_MASTER) != -1)
+        var x = bodyText.indexOf(SEARCH_MASTER);
+    if (bodyText.indexOf(SEARCH_DIA) != -1)
+        var x = bodyText.indexOf(SEARCH_DIA);
+    if (bodyText.indexOf(SEARCH_PLAT) != -1)
+        var x = bodyText.indexOf(SEARCH_PLAT);
+    if (bodyText.indexOf(SEARCH_GOLD) != -1)
+        var x = bodyText.indexOf(SEARCH_GOLD);
+    if (bodyText.indexOf(SEARCH_SILVER) != -1)
+        var x = bodyText.indexOf(SEARCH_SILVER);
+    if (bodyText.indexOf(SEARCH_BRONZE) != -1)
+        var x = bodyText.indexOf(SEARCH_BRONZE);
 
+
+    //console.log(bodyText.indexOf(SEARCH_MASTER));
     var rank = "";
+    var flag = 0;
 
     //Get rank and division
-    if (SEARCH_CHALLENGER || SEARCH_PLAT) {
-        for (var i = x; i < x+10; i++) {
-            rank = rank + bodyText.charAt(i);
-            //console.log("your rank is: " + rank);
+    //if (bodyText.indexOf(SEARCH_CHALLENGER) != -1 || bodyText.indexOf(SEARCH_PLAT) != -1 || bodyText.indexOf(SEARCH_DIA) != -1) {
+    for (var i = x; i < x+10; i++) {
+        rank = rank + bodyText.charAt(i);
+        //console.log("your rank is: " + rank);
+        if (flag == 1) {
+            i = x + 10;
+            //console.log("char at i is: " + bodyText.charAt(i));
         }
-    }
-
-    else if (SEARCH_MASTER || SEARCH_SILVER || SEARCH_BRONZE) {
-        for (var i = x; i < x+6; i++) {
-            rank = rank + bodyText.charAt(i);
-        }
-    }
-
-    else if (SEARCH_DIA) {
-        for (var i = x; i < x+7; i++) {
-            rank = rank + bodyText.charAt(i);
-        }
-    }
-
-    else if (SEARCH_GOLD) {
-        for (var i = x; i < x+4; i++) {
-            rank = rank + bodyText.charAt(i);
+        if (bodyText.charAt(i) == ' ' || bodyText.charAt(i) == '\n' || bodyText.charAt(i) == '/') {
+            //console.log("does this ever work?");
+            flag = 1;
         }
     }
 
@@ -127,18 +147,19 @@ function returnRanking($, word) {
     var lp_9 = bodyText.charAt(temp-2);
     var temporary = bodyText.substring(temp-1, temp+2);
 
-    //handle 100lp case
-    if (((lp_8 === '0') && (lp_9 === '0'))){
-        var lp = lp_7 + lp_8 + lp_9 + temporary;
-    }
-
     //handle 0lp case
-    else if (lp_9 === 10) {
+    if (!(lp_7 >= 1 && lp_7 <= 9) && !(lp_8 >= 1 && lp_8 <= 9) && (lp_9 === '0')) {
+        //console.log("ugh");
         var lp = lp_9 + temporary;
     }
 
+    //handle 100lp case
+    if (((lp_7 === '1') && (lp_8 === '0') && (lp_9 === '0'))){
+        var lp = lp_7 + lp_8 + lp_9 + temporary;
+    }
+
     //handle XX lp case
-    else {
+    if (lp_8 >= 1) {
         var lp = lp_8 + lp_9 + temporary;
     }
 
