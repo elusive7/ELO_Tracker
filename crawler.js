@@ -2,14 +2,40 @@
 /* Web Crawler for Auto ELO Tracking */
 
 //User defined variables
-var person = "Noctierre";
+
+//var person = "";
+var person = "Dreams";
 var server = "na";
 
 var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
+var process = require('process');
+var twilio = require('twilio');
 var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
 var url = new URL(START_URL);
+
+var client = twilio('myID', 'myToken');
+
+var final_output = "";
+/*
+var test = true;
+function input_user() {
+    console.log("Please enter the person you would like to look up");
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', function (words) {
+        person = words;
+    });
+    test = false;
+    return;
+}
+function askName() {
+    while (test == true) {
+        input_user();
+    };
+}
+askName();*/
+
 
 //Potential divisions
 var SEARCH_CHALLENGER = "Challenger";
@@ -84,10 +110,10 @@ request(pageToVisit, function(error, response, body) {
                     console.log(". . .");
                     break;
                 }
-                default:
-                    console.log("Couldn't find " + person + " :|");
             }
         }
+        else
+            console.log("Unable to find " + person);
     }
 });
 
@@ -137,48 +163,56 @@ function returnRanking($, word) {
     var lp_8 = bodyText.charAt(temp-3);
     var lp_9 = bodyText.charAt(temp-2);
     var sum = "" + lp_5 + lp_7 + lp_8 + lp_9;
-    var temporary = bodyText.substring(temp-1, temp+2);
+    var lp_name = bodyText.substring(temp-1, temp+2);
 
     //handle 0lp case
     if (!(lp_7 >= 1 && lp_7 <= 9) && !(lp_8 >= 1 && lp_8 <= 9) && (lp_9 === '0')) {
         //console.log("ugh");
-        var lp = lp_9 + temporary;
+        var lp = lp_9 + lp_name;
     }
 
     //handle 100lp case
     if ("" + lp_7 + lp_8 + lp_9 === '100'){
-        var lp = lp_7 + lp_8 + lp_9 + temporary;
+        var lp = lp_7 + lp_8 + lp_9 + lp_name;
     }
 
     //handle 0<x<10 lp
     if ("" + lp_9 > 0 && "" + lp_9 < 10) {
-        var lp = lp_9 + temporary;
+        var lp = lp_9 + lp_name;
     }
 
     //handle 10<x<100 lp
     if ("" + lp_8 + lp_9 >= 10) {
-        var lp = lp_8 + lp_9 + temporary;
+        var lp = lp_8 + lp_9 + lp_name;
     }
 
     //handle 100<x<1000 lp
     if ("" + lp_7 + lp_8 + lp_9 > 100){
-        var lp = lp_7 + lp_8 + lp_9 + temporary;
+        var lp = lp_7 + lp_8 + lp_9 + lp_name;
     }
 
     //handle 1000<x lp
     if ("" + lp_5 + lp_7 + lp_8 + lp_9 >= 1000) {
-        var lp = lp_5 + lp_7 + lp_8 + lp_9 + temporary;
+        var lp = lp_5 + lp_7 + lp_8 + lp_9 + lp_name;
     }
 
     //Calculate final result
     if (sum > 400)
-        return ("Challenger" + "\n" + lp);
+        final_output = ("Challenger" + "\n" + lp);
 
     else if (sum < 400 && sum > 100)
-        return ("Master" + "\n" + lp);
+        final_output = ("Master" + "\n" + lp);
 
-    else {
-        return rank + '\n' + lp;
-    }
-
+    else
+        final_output = rank + '\n' + lp;
+/*
+    //uses Twilio to send sms
+    client.sendMessage({
+        to: '7328958345',
+        from: '7326390801',
+        body: "ELO Tracking.. " + person + " is currently: " + final_output + ". Unlucky :|"
+    });
+*/
+    return final_output;
 }
+
