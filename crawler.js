@@ -15,8 +15,6 @@ var twilio = require('twilio');
 var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
 var url = new URL(START_URL);
 
-var client = twilio('AC0989cc1a83ceac4e49bd5c6f4235bae1', '2e898bc818aeb218a3b38d648f8b8a12');
-
 var final_output = "";
 
 //Potential divisions
