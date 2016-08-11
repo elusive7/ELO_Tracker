@@ -7,13 +7,12 @@
 var person = "Noctierre";
 var server = "na";
 
+//Required node libs
 var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
 var process = require('process');
 var twilio = require('twilio');
-var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
-var url = new URL(START_URL);
 
 var final_output = "";
 
@@ -29,9 +28,8 @@ var SEARCH_BRONZE = "Bronze ";
 var pageToVisit = "http://" + server + ".op.gg/summoner/userName=" + person;
 
 request(pageToVisit, function(error, response, body) {
-    if(error) {
+    if(error)
         console.log("Error: " + error);
-    }
 
     // Check status code (200 is HTTP OK)
     if(response.statusCode === 200) {
@@ -44,21 +42,16 @@ request(pageToVisit, function(error, response, body) {
         // check which division they are in
         var isWordFound = searchForWord($, SEARCH_PLAT);
 
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_DIA);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_GOLD);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_MASTER);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_CHALLENGER);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_BRONZE);
-        }
 
         var hisRanking = returnRanking($, 'LP');
         if(isWordFound) {
@@ -142,34 +135,28 @@ function returnRanking($, word) {
     var lp_name = bodyText.substring(temp-1, temp+2);
 
     //handle 0lp case
-    if (!(lp_7 >= 1 && lp_7 <= 9) && !(lp_8 >= 1 && lp_8 <= 9) && (lp_9 === '0')) {
+    if (!(lp_7 >= 1 && lp_7 <= 9) && !(lp_8 >= 1 && lp_8 <= 9) && (lp_9 === '0'))
         var lp = lp_9 + lp_name;
-    }
 
     //handle 100lp case
-    if ("" + lp_7 + lp_8 + lp_9 === '100'){
+    if ("" + lp_7 + lp_8 + lp_9 === '100')
         var lp = lp_7 + lp_8 + lp_9 + lp_name;
-    }
 
     //handle 0<x<10 lp
-    if ("" + lp_9 > 0 && "" + lp_9 < 10) {
+    if ("" + lp_9 > 0 && "" + lp_9 < 10)
         var lp = lp_9 + lp_name;
-    }
 
     //handle 10<x<100 lp
-    if ("" + lp_8 + lp_9 >= 10) {
+    if ("" + lp_8 + lp_9 >= 10)
         var lp = lp_8 + lp_9 + lp_name;
-    }
 
     //handle 100<x<1000 lp
-    if ("" + lp_7 + lp_8 + lp_9 > 100){
+    if ("" + lp_7 + lp_8 + lp_9 > 100)
         var lp = lp_7 + lp_8 + lp_9 + lp_name;
-    }
 
     //handle 1000<x lp
-    if ("" + lp_5 + lp_7 + lp_8 + lp_9 >= 1000) {
+    if ("" + lp_5 + lp_7 + lp_8 + lp_9 >= 1000)
         var lp = lp_5 + lp_7 + lp_8 + lp_9 + lp_name;
-    }
 
     //Calculate final result
     if (sum > 400)
