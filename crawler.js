@@ -4,7 +4,7 @@
 /* TODO: ADD FIX FOR IF USER IS IN RANKED TEAMS */
 
 //User defined variables, SET PERSON AND SERVER MANUALLY!
-var person = "ggtilted";
+var person = "Noctierre";
 var server = "na";
 
 var request = require('request');
