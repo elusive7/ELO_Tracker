@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce7a8038-dd2d-4bd6-905e-29dafe82bf05" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/noctierre.iml" afterPath="$PROJECT_DIR$/.idea/noctierre.iml" />
+=======
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler.js" afterPath="$PROJECT_DIR$/crawler.js" />
     </list>
@@ -41,8 +44,13 @@
       <file leaf-file-name="crawler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/crawler.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="170">
               <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+=======
+            <state relative-caret-position="701">
+              <caret line="173" column="26" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -50,6 +58,29 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="info.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/info.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="1" column="45" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -204,14 +235,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1470671491673</updated>
+<<<<<<< HEAD
       <workItem from="1470671492955" duration="36635000" />
       <workItem from="1470873613509" duration="2040000" />
       <workItem from="1471023890028" duration="627000" />
+=======
+      <workItem from="1470671492955" duration="41484000" />
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="39302000" />
+=======
+    <option name="totallyTimeSpent" value="41484000" />
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
   </component>
   <component name="ToolWindowManager">
     <frame x="2552" y="-8" width="1936" height="1056" extended-state="6" />
@@ -291,8 +330,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="357">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+=======
+        <state relative-caret-position="25">
+          <caret line="1" column="45" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="45" />
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
           <folding />
         </state>
       </provider>
@@ -303,8 +347,13 @@
     <entry file="file://$PROJECT_DIR$/info.js" />
     <entry file="file://$PROJECT_DIR$/crawler.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="170">
           <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+=======
+        <state relative-caret-position="701">
+          <caret line="173" column="26" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

@@ -1,41 +1,32 @@
 /* Created by Elusive7 on 8/9/2016 */
 /* Web Crawler for Auto ELO Tracking */
 
-//User defined variables
+/* TODO: ADD FIX FOR IF USER IS IN RANKED TEAMS */
 
+<<<<<<< HEAD
 //var person = "";
+=======
+//User defined variables, SET PERSON AND SERVER MANUALLY!
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
 var person = "Noctierre";
 var server = "na";
 
+//Required node libs
 var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
 var process = require('process');
+<<<<<<< HEAD
 //var twilio = require('twilio');
 var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
 var url = new URL(START_URL);
 
 //var client = twilio('myID', 'myToken');
+=======
+var twilio = require('twilio');
+>>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
 
 var final_output = "";
-/*
-var test = true;
-function input_user() {
-    console.log("Please enter the person you would like to look up");
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', function (words) {
-        person = words;
-    });
-    test = false;
-    return;
-}
-function askName() {
-    while (test == true) {
-        input_user();
-    };
-}
-askName();*/
-
 
 //Potential divisions
 var SEARCH_CHALLENGER = "Challenger";
@@ -49,36 +40,32 @@ var SEARCH_BRONZE = "Bronze ";
 var pageToVisit = "http://" + server + ".op.gg/summoner/userName=" + person;
 
 request(pageToVisit, function(error, response, body) {
-    if(error) {
+    if(error)
         console.log("Error: " + error);
-    }
+
     // Check status code (200 is HTTP OK)
     if(response.statusCode === 200) {
-        // Parse  document body
+        // Parse document body
         var $ = cheerio.load(body);
 
-        console.log("Pulling data from op.gg to check " + "'" + person + "'s current rank..");
+        var d = new Date();
+        console.log("Checking " + person + "'s current rank as of " + d + "..");
 
-        // true or false
+        // check which division they are in
         var isWordFound = searchForWord($, SEARCH_PLAT);
-        if (!isWordFound) {
+
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_DIA);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_GOLD);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_MASTER);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_CHALLENGER);
-        }
-        if (!isWordFound) {
+        if (!isWordFound)
             isWordFound = searchForWord($, SEARCH_BRONZE);
-        }
 
         var hisRanking = returnRanking($, 'LP');
-
         if(isWordFound) {
             console.log(person + " is currently: " + '\n' + hisRanking);
             switch(hisRanking.charAt(0).toString()) {
@@ -125,8 +112,7 @@ function searchForWord($, word) {
 function returnRanking($, word) {
     var bodyText = $('html > body').text();
     var temp = bodyText.indexOf(word);
-
-    //TODO: OP.GG TREATS CHALLENGERS AS MASTERS
+    //TODO: OP.GG TREATS 'CHALLENGERS' === 'MASTERS'
     if (bodyText.indexOf(SEARCH_MASTER) != -1)
         var x = bodyText.indexOf(SEARCH_MASTER);
     if (bodyText.indexOf(SEARCH_DIA) != -1)
@@ -146,15 +132,10 @@ function returnRanking($, word) {
     //Get rank and division
     for (var i = x; i < x + 10; i++) {
         rank = rank + bodyText.charAt(i);
-        //console.log("your rank is: " + rank);
-        if (flag == 1) {
+        if (flag == 1)
             i = x + 10;
-            //console.log("char at i is: " + bodyText.charAt(i));
-        }
-        if (bodyText.charAt(i) == ' ') {
-            //console.log("does this ever work?");
+        if (bodyText.charAt(i) == ' ')
             flag = 1;
-        }
     }
 
     //Get points and lp
@@ -166,35 +147,28 @@ function returnRanking($, word) {
     var lp_name = bodyText.substring(temp-1, temp+2);
 
     //handle 0lp case
-    if (!(lp_7 >= 1 && lp_7 <= 9) && !(lp_8 >= 1 && lp_8 <= 9) && (lp_9 === '0')) {
-        //console.log("ugh");
+    if (!(lp_7 >= 1 && lp_7 <= 9) && !(lp_8 >= 1 && lp_8 <= 9) && (lp_9 === '0'))
         var lp = lp_9 + lp_name;
-    }
 
     //handle 100lp case
-    if ("" + lp_7 + lp_8 + lp_9 === '100'){
+    if ("" + lp_7 + lp_8 + lp_9 === '100')
         var lp = lp_7 + lp_8 + lp_9 + lp_name;
-    }
 
     //handle 0<x<10 lp
-    if ("" + lp_9 > 0 && "" + lp_9 < 10) {
+    if ("" + lp_9 > 0 && "" + lp_9 < 10)
         var lp = lp_9 + lp_name;
-    }
 
     //handle 10<x<100 lp
-    if ("" + lp_8 + lp_9 >= 10) {
+    if ("" + lp_8 + lp_9 >= 10)
         var lp = lp_8 + lp_9 + lp_name;
-    }
 
     //handle 100<x<1000 lp
-    if ("" + lp_7 + lp_8 + lp_9 > 100){
+    if ("" + lp_7 + lp_8 + lp_9 > 100)
         var lp = lp_7 + lp_8 + lp_9 + lp_name;
-    }
 
     //handle 1000<x lp
-    if ("" + lp_5 + lp_7 + lp_8 + lp_9 >= 1000) {
+    if ("" + lp_5 + lp_7 + lp_8 + lp_9 >= 1000)
         var lp = lp_5 + lp_7 + lp_8 + lp_9 + lp_name;
-    }
 
     //Calculate final result
     if (sum > 400)
@@ -205,14 +179,16 @@ function returnRanking($, word) {
 
     else
         final_output = rank + '\n' + lp;
-/*
+
+    /*
     //uses Twilio to send sms
     client.sendMessage({
-        to: '7328958345',
+        to: '17328958345',
         from: '7326390801',
         body: "ELO Tracking.. " + person + " is currently: " + final_output + ". Unlucky :|"
     });
-*/
+    console.log("sent");
+    */
     return final_output;
 }
 
