@@ -3,11 +3,7 @@
 
 /* TODO: ADD FIX FOR IF USER IS IN RANKED TEAMS */
 
-<<<<<<< HEAD
-//var person = "";
-=======
 //User defined variables, SET PERSON AND SERVER MANUALLY!
->>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
 var person = "Noctierre";
 var server = "na";
 
@@ -16,15 +12,12 @@ var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
 var process = require('process');
-<<<<<<< HEAD
-//var twilio = require('twilio');
+
 var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
 var url = new URL(START_URL);
 
 //var client = twilio('myID', 'myToken');
-=======
-var twilio = require('twilio');
->>>>>>> 97d739c7999a802a116e661c897e1fe1e082592e
+//var twilio = require('twilio');
 
 var final_output = "";
 
