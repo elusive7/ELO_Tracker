@@ -4,18 +4,18 @@
 //User defined variables
 
 //var person = "";
-var person = "Dreams";
+var person = "Noctierre";
 var server = "na";
 
 var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
 var process = require('process');
-var twilio = require('twilio');
+//var twilio = require('twilio');
 var START_URL = ("http://" + server + ".op.gg/summoner/userName=" + person);
 var url = new URL(START_URL);
 
-var client = twilio('myID', 'myToken');
+//var client = twilio('myID', 'myToken');
 
 var final_output = "";
 /*
